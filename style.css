@@ -28,6 +28,18 @@ body {
   height: 100vh;
 }
 
+.players {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: var(--cell-gap);
+  text-align: center;
+}
+
+.player-1,
+.player-2 {
+  cursor: pointer;
+}
+
 /* Gameboard styles */
 
 .gameboard {
