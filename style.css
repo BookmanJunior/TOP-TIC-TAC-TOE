@@ -1,0 +1,25 @@
+:root {
+  --cell-color: #c9f9fc;
+  --background-color: #ffffff;
+  --candlelight: #fcd015;
+  --yellow: #fbb500;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+.cell {
+  width: 150px;
+  height: 150px;
+  background-color: var(--cell-color);
+  border-radius: 16px;
+  border: 8px solid black;
+  box-shadow: -3px 5px black;
+}
