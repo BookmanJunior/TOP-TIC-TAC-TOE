@@ -1,8 +1,12 @@
 :root {
   --cell-color: #c9f9fc;
-  --background-color: #ffffff;
+  --background-color: #e5e5e5;
+  --gameboard-background-color: #ffffff;
+  --border-color: #000000;
+  --shadow-color: #000000;
   --candlelight: #fcd015;
   --yellow: #fbb500;
+  --cell-gap: 1em;
 }
 
 * {
@@ -11,15 +15,48 @@
   box-sizing: border-box;
 }
 
+/* General Styles */
+
 body {
+  background-color: var(--background-color);
   height: 100vh;
+}
+
+.wrapper {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+/* Gameboard styles */
+
+.gameboard {
+  background-color: var(--gameboard-background-color);
+  width: 600px;
+  height: 600px;
+  border: 10px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: -8px 8px var(--shadow-color);
+  display: grid;
+}
+
+.cell-wrapper {
+  display: grid;
+  place-self: center;
+  gap: var(--cell-gap);
+}
+
+.row-list {
+  display: flex;
+  gap: var(--cell-gap);
 }
 
 .cell {
   width: 150px;
   height: 150px;
   background-color: var(--cell-color);
+  border: 5px solid var(--border-color);
   border-radius: 16px;
-  border: 8px solid black;
-  box-shadow: -3px 5px black;
+  box-shadow: -3px 5px var(--shadow-color);
+  cursor: pointer;
 }
