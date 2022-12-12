@@ -49,13 +49,10 @@ body {
   border: 10px solid var(--border-color);
   border-radius: 16px;
   box-shadow: -8px 8px var(--shadow-color);
-  display: grid;
-}
 
-.cell-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  place-self: center;
+  grid-template-columns: repeat(3, 150px);
+  place-content: center;
   gap: var(--cell-gap);
 }
 
