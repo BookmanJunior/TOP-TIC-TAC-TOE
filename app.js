@@ -1,5 +1,5 @@
 const Gameboard = (() => {
-  const gameBoard = [[], [], []];
+  const gameBoard = [];
 })();
 const displayController = (() => {})();
 const Player = (name) => {};
