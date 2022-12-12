@@ -54,12 +54,8 @@ body {
 
 .cell-wrapper {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
   place-self: center;
-  gap: var(--cell-gap);
-}
-
-.row-list {
-  display: flex;
   gap: var(--cell-gap);
 }
 
