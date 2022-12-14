@@ -1,13 +1,19 @@
 const Gameboard = (() => {
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
+  const cells = document.querySelectorAll(".cell");
 
-  const getGameBoard = () => gameBoard;
+  const render = () => {
+    for (i = 0; i < cells.length; i++) {
+      cells[i].textContent = gameBoard[i];
+    }
+  };
+
   const addNewValue = (value, index) => {
     gameBoard[index] = value;
+    render();
   };
 
   return {
-    getGameBoard,
     addNewValue,
   };
 })();
@@ -16,30 +22,19 @@ const displayController = (() => {
   const domGameBoard = document.getElementById("gameBoard");
   const cells = domGameBoard.querySelectorAll(".cell");
 
-  const render = () => {
-    const gameBoard = Gameboard.getGameBoard();
-    for (i = 0; i < cells.length; i++) {
-      cells[i].textContent = gameBoard[i];
-    }
-  };
-
-  const displayMove = () => {
-    Array.from(cells).forEach((cell, index) => {
+  const displayMove = (value) => {
+    cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
-        if (cell.textContent !== "x" || cell.textContent !== "o") {
-          Gameboard.addNewValue("x", index);
-          render();
+        if (!cell.textContent) {
+          Gameboard.addNewValue(value, index);
         }
       });
     });
   };
 
   return {
-    render,
     displayMove,
   };
 })();
 
 const Player = (name) => {};
-
-displayController.displayMove();
