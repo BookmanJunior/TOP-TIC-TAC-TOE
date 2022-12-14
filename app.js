@@ -1,40 +1,5 @@
 const Gameboard = (() => {
-  const gameBoard = new Array(9);
-  const cells = document.querySelectorAll(".cell");
-
-  const render = () => {
-    for (i = 0; i < cells.length; i++) {
-      cells[i].textContent = gameBoard[i];
-    }
-  };
-
-  const addNewValue = (value, index) => {
-    gameBoard[index] = value;
-    render();
-  };
-
-  return {
-    addNewValue,
-  };
+  const gameBoard = [];
 })();
-
-const displayController = (() => {
-  const domGameBoard = document.getElementById("gameBoard");
-  const cells = domGameBoard.querySelectorAll(".cell");
-
-  const displayMove = (value) => {
-    cells.forEach((cell, index) => {
-      cell.addEventListener("click", () => {
-        if (!cell.textContent) {
-          Gameboard.addNewValue(value, index);
-        }
-      });
-    });
-  };
-
-  return {
-    displayMove,
-  };
-})();
-
+const displayController = (() => {})();
 const Player = (name) => {};
