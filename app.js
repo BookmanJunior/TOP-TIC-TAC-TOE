@@ -1,5 +1,5 @@
 const Gameboard = (() => {
-  const gameBoard = ["", "", "", "", "", "", "", "", ""];
+  const gameBoard = new Array(9);
   const cells = document.querySelectorAll(".cell");
 
   const render = () => {
