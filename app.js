@@ -1,11 +1,12 @@
 const gameBoard = (() => {
   const board = new Array(9);
   const getGameBoard = () => Object.freeze(board);
-  const addMark = (position, mark) => {
-    board[position] = mark;
+
+  const setCell = (position, value) => {
+    board[position] = value;
   };
 
-  return { getGameBoard, addMark };
+  return { getGameBoard, setCell };
 })();
 
 const displayController = (() => {
