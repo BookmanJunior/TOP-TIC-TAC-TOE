@@ -1,6 +1,6 @@
 const gameBoard = (() => {
   const board = new Array(9);
-  const getGameBoard = () => board;
+  const getGameBoard = () => Object.freeze(board);
 
   return { getGameBoard };
 })();
