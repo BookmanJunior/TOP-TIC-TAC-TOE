@@ -5,6 +5,16 @@ const gameBoard = (() => {
   return { getGameBoard };
 })();
 
-const displayController = (() => {})();
+const displayController = (() => {
+  const cells = Array.from(document.getElementsByClassName("cell"));
+
+  const render = () => {
+    cells.forEach((cell, index) => {
+      cell.textContent = gameBoard.getGameBoard()[index];
+    });
+  };
+
+  return { render };
+})();
 
 const Player = () => {};
