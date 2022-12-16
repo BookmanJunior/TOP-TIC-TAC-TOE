@@ -1,12 +1,16 @@
 const gameBoard = (() => {
-  const board = new Array(9);
+  const board = new Array(9).fill("");
   const getGameBoard = () => [...board];
 
   const setCell = (position, marker) => {
     board[position] = marker;
   };
 
-  return { getGameBoard, setCell };
+  const resetBoard = () => {
+    board.fill("");
+  };
+
+  return { getGameBoard, setCell, resetBoard };
 })();
 
 const displayController = (() => {
