@@ -20,6 +20,11 @@ const gameBoard = (() => {
     board.fill("");
   };
 
+  const checkForWin = (marker) =>
+    winPatterns.find((winPattern) =>
+      winPattern.every((element) => board[element].includes(marker))
+    );
+
   return { getGameBoard, setCell, resetBoard };
 })();
 
