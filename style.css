@@ -60,15 +60,17 @@ body {
 }
 
 .cell {
+  font-size: 12rem;
   width: 150px;
   height: 150px;
   background-color: var(--cell-color);
   border: 5px solid var(--border-color);
   border-radius: 16px;
   box-shadow: -3px 5px var(--shadow-color);
-  cursor: pointer;
-  font-size: 12rem;
   color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0em 0em 0.08em 0.05em;
   text-shadow: -8px 1px var(--shadow-color);
   -webkit-text-stroke: 4px var(--shadow-color);
 
