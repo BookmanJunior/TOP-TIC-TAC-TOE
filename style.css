@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@700&display=swap");
+
 :root {
   --cell-color: #c9f9fc;
   --background-color: #e5e5e5;
@@ -18,6 +20,7 @@
 /* General Styles */
 
 body {
+  font-family: "Exo", sans-serif;
   background-color: var(--background-color);
   height: 100vh;
 }
@@ -64,7 +67,12 @@ body {
   border-radius: 16px;
   box-shadow: -3px 5px var(--shadow-color);
   cursor: pointer;
+  font-size: 12rem;
+  color: transparent;
+  text-shadow: -8px 1px var(--shadow-color);
+  -webkit-text-stroke: 4px var(--shadow-color);
 
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
