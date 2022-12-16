@@ -27,6 +27,8 @@ const displayController = (() => {
 })();
 
 const Player = (marker) => {
+  const getMarker = () => marker;
+
   const makeMove = () => {
     const cells = displayController.getCells();
     cells.forEach((cell, index) => {
@@ -39,5 +41,5 @@ const Player = (marker) => {
     });
   };
 
-  return { makeMove };
+  return { makeMove, getMarker };
 };
