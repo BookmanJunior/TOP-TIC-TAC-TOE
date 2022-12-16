@@ -44,7 +44,7 @@ const Player = (marker) => {
     displayController.render();
   };
 
-  return { makeMove };
+  return { makeMove, getMarker };
 };
 
 const gameController = (() => {
