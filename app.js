@@ -1,6 +1,6 @@
 const gameBoard = (() => {
   const board = new Array(9);
-  const getGameBoard = () => Object.freeze(board);
+  const getGameBoard = () => [...board];
 
   const setCell = (position, marker) => {
     board[position] = marker;
