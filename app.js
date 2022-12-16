@@ -29,17 +29,27 @@ const displayController = (() => {
 const Player = (marker) => {
   const getMarker = () => marker;
 
-  const makeMove = () => {
-    const cells = displayController.getCells();
-    cells.forEach((cell, index) => {
-      cell.addEventListener("click", () => {
-        if (!cell.textContent) {
-          gameBoard.setCell(index, marker);
-          displayController.render();
-        }
-      });
-    });
+  const makeMove = (index) => {
+    gameBoard.setCell(index, getMarker());
+    displayController.render();
   };
 
-  return { makeMove, getMarker };
+  return { makeMove };
 };
+
+const gameController = (() => {
+  const player1 = Player("x");
+  const player2 = Player("o");
+
+  let currentPlayer = player1;
+
+  const changeTurn = () => {
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
+    } else {
+      currentPlayer = player1;
+    }
+  };
+
+  return { playGame };
+})();
