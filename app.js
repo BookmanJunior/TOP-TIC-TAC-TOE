@@ -51,5 +51,20 @@ const gameController = (() => {
     }
   };
 
+  const playGame = () => {
+    const cells = displayController.getCells();
+
+    cells.forEach((cell, index) => {
+      cell.addEventListener("click", () => {
+        if (!cell.textContent) {
+          currentPlayer.makeMove(index);
+          changeTurn();
+        }
+      });
+    });
+  };
+
   return { playGame };
 })();
+
+gameController.playGame();
