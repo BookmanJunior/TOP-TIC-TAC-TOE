@@ -3,6 +3,7 @@
 :root {
   --cell-color: #c9f9fc;
   --background-color: #e5e5e5;
+  --cell-win-color: #89a99a;
   --gameboard-background-color: #ffffff;
   --border-color: #000000;
   --shadow-color: #000000;
@@ -77,4 +78,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cell.win {
+  background-color: #93faa4;
+}
+
+.turn {
+  border-bottom: 1px solid black;
 }
