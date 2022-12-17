@@ -64,11 +64,13 @@ const Player = (name, marker) => {
 };
 
 const gameController = (() => {
+  let gameOn = true;
+
   const player1 = Player("Player 1", "x");
   const player2 = Player("Player 2", "o");
+  const cells = displayController.getCells();
 
   let currentPlayer = player1;
-
   const changeTurn = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -77,11 +79,7 @@ const gameController = (() => {
     }
   };
 
-  let gameOn = true;
-
   const playGame = () => {
-    const cells = displayController.getCells();
-
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
         if (gameOn) {
