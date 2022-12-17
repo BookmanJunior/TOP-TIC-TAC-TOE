@@ -79,19 +79,23 @@ const gameController = (() => {
     }
   };
 
+  const playRound = (cell, index) => {
+    if (!cell.textContent) {
+      currentPlayer.makeMove(index);
+      const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+      if (winPattern) {
+        displayController.setWinningClasses(winPattern);
+        gameOn = false;
+      }
+      changeTurn();
+    }
+  };
+
   const playGame = () => {
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
         if (gameOn) {
-          if (!cell.textContent) {
-            currentPlayer.makeMove(index);
-            const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
-            if (winPattern) {
-              displayController.setWinningClasses(winPattern);
-              gameOn = false;
-            }
-            changeTurn();
-          }
+          playRound(cell, index);
         }
       });
     });
