@@ -47,20 +47,25 @@ const displayController = (() => {
   return { render, getCells, setWinningClasses };
 })();
 
-const Player = (marker) => {
+const Player = (name, marker) => {
+  const getName = () => name;
   const getMarker = () => marker;
 
+  const setName = (newName) => {
+    name = newName;
+  };
+
   const makeMove = (index) => {
-    gameBoard.setCell(index, getMarker());
+    gameBoard.setCell(index, marker);
     displayController.render();
   };
 
-  return { makeMove, getMarker };
+  return { makeMove, getName, getMarker, setName };
 };
 
 const gameController = (() => {
-  const player1 = Player("x");
-  const player2 = Player("o");
+  const player1 = Player("Player 1", "x");
+  const player2 = Player("Player 2", "o");
 
   let currentPlayer = player1;
 
