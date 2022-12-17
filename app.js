@@ -77,14 +77,23 @@ const gameController = (() => {
     }
   };
 
+  let gameOn = true;
+
   const playGame = () => {
     const cells = displayController.getCells();
 
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
-        if (!cell.textContent) {
-          currentPlayer.makeMove(index);
-          changeTurn();
+        if (gameOn) {
+          if (!cell.textContent) {
+            currentPlayer.makeMove(index);
+            const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+            if (winPattern) {
+              displayController.setWinningClasses(winPattern);
+              gameOn = false;
+            }
+            changeTurn();
+          }
         }
       });
     });
