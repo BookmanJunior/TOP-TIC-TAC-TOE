@@ -64,8 +64,6 @@ const Player = (name, marker) => {
 };
 
 const gameController = (() => {
-  let gameOn = true;
-
   const player1 = Player("Player 1", "x");
   const player2 = Player("Player 2", "o");
   const cells = displayController.getCells();
@@ -79,16 +77,17 @@ const gameController = (() => {
     }
   };
 
+  let gameOn = true;
   const playRound = (cell, index) => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
-      const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
-      if (winPattern) {
-        displayController.setWinningClasses(winPattern);
-        gameOn = false;
-      }
-      changeTurn();
     }
+    const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+    if (winPattern) {
+      displayController.setWinningClasses(winPattern);
+      gameOn = false;
+    }
+    changeTurn();
   };
 
   const playGame = () => {
