@@ -25,7 +25,7 @@ const gameBoard = (() => {
       winPattern.every((element) => board[element].includes(marker))
     );
 
-  return { getGameBoard, setCell, resetBoard };
+  return { getGameBoard, setCell, resetBoard, checkForWin };
 })();
 
 const displayController = (() => {
@@ -38,7 +38,13 @@ const displayController = (() => {
     });
   };
 
-  return { render, getCells };
+  const setWinningClasses = (array) => {
+    array.forEach((item) => {
+      cells[item].classList.add("win");
+    });
+  };
+
+  return { render, getCells, setWinningClasses };
 })();
 
 const Player = (marker) => {
