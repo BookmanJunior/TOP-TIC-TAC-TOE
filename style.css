@@ -89,6 +89,15 @@ body {
   border-bottom: 1px solid black;
 }
 
+.restart-btn {
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: 30%;
+  place-self: center;
+  cursor: pointer;
+}
+
 /* Media query styles */
 @media screen and (min-width: 620px) {
   .gameboard {
