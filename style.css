@@ -91,6 +91,7 @@ body {
 
 /* Button styles */
 .restart-btn {
+  font-family: "Exo", sans-serif;
   font-size: 1rem;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
@@ -112,7 +113,6 @@ body {
   z-index: -1;
   background-color: var(--cell-color);
   border-radius: 5px;
-  /* padding: 8px 16px; */
   outline: none;
 
   transition: transform 300ms ease-in-out;
