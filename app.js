@@ -25,7 +25,9 @@ const gameBoard = (() => {
       winPattern.every((element) => board[element].includes(marker))
     );
 
-  return { getGameBoard, setCell, resetBoard, checkForWin };
+  const checkForDraw = () => board.every((item) => item);
+
+  return { getGameBoard, setCell, resetBoard, checkForWin, checkForDraw };
 })();
 
 const displayController = (() => {
@@ -84,11 +86,18 @@ const gameController = (() => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
     }
+
     const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+
     if (winPattern) {
       displayController.setWinningClasses(winPattern);
       gameOn = false;
     }
+
+    if (gameBoard.checkForDraw()) {
+      gameOn = false;
+    }
+
     changeTurn();
   };
 
