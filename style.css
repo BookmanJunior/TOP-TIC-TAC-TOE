@@ -89,13 +89,39 @@ body {
   border-bottom: 1px solid black;
 }
 
+/* Button styles */
 .restart-btn {
+  font-size: 1rem;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 5px;
   width: 30%;
   place-self: center;
+  position: relative;
   cursor: pointer;
+  z-index: 1;
+}
+
+.restart-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: var(--cell-color);
+  border-radius: 5px;
+  /* padding: 8px 16px; */
+  outline: none;
+
+  transition: transform 300ms ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.restart-btn:hover::before {
+  transform: scaleX(1);
 }
 
 /* Media query styles */
