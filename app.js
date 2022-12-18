@@ -69,6 +69,7 @@ const gameController = (() => {
   const cells = displayController.getCells();
 
   let currentPlayer = player1;
+
   const changeTurn = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -78,6 +79,7 @@ const gameController = (() => {
   };
 
   let gameOn = true;
+
   const playRound = (cell, index) => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
