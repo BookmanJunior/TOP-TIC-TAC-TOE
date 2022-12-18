@@ -32,6 +32,7 @@ const gameBoard = (() => {
 
 const displayController = (() => {
   const cells = Array.from(document.getElementsByClassName("cell"));
+  const restartBtn = document.getElementById("restartBtn");
   const getCells = () => [...cells];
 
   const render = () => {
@@ -46,7 +47,19 @@ const displayController = (() => {
     });
   };
 
-  return { render, getCells, setWinningClasses };
+  const resetClasses = () => {
+    cells.forEach((cell) => {
+      cell.className = "cell";
+    });
+  };
+
+  return {
+    render,
+    getCells,
+    setWinningClasses,
+    resetClasses,
+    restartBtn,
+  };
 })();
 
 const Player = (name, marker) => {
@@ -110,6 +123,15 @@ const gameController = (() => {
       });
     });
   };
+
+  const restartGame = () => {
+    gameBoard.resetBoard();
+    displayController.render();
+    displayController.resetClasses();
+    gameOn = true;
+  };
+
+  displayController.restartBtn.addEventListener("click", restartGame);
 
   return { playGame };
 })();
