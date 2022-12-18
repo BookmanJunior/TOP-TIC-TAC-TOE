@@ -10,6 +10,7 @@
   --candlelight: #fcd015;
   --yellow: #fbb500;
   --cell-gap: 1em;
+  --shrink-size: 2;
 }
 
 * {
@@ -30,12 +31,12 @@ body {
   display: grid;
   place-content: center;
   height: 100vh;
+  row-gap: 1em;
 }
 
 .players {
   display: flex;
   justify-content: space-around;
-  margin-bottom: var(--cell-gap);
   text-align: center;
 }
 
@@ -48,22 +49,22 @@ body {
 
 .gameboard {
   background-color: var(--gameboard-background-color);
-  width: 600px;
-  height: 600px;
+  width: calc(600px / var(--shrink-size));
+  height: calc(600px / var(--shrink-size));
   border: 10px solid var(--border-color);
   border-radius: 16px;
   box-shadow: -8px 8px var(--shadow-color);
 
   display: grid;
-  grid-template-columns: repeat(3, 150px);
+  grid-template-columns: repeat(3, 75px);
   place-content: center;
   gap: var(--cell-gap);
 }
 
 .cell {
-  font-size: 12rem;
-  width: 150px;
-  height: 150px;
+  font-size: 5rem;
+  width: calc(150px / var(--shrink-size));
+  height: calc(150px / var(--shrink-size));
   background-color: var(--cell-color);
   border: 5px solid var(--border-color);
   border-radius: 16px;
@@ -72,8 +73,8 @@ body {
   cursor: pointer;
   overflow: hidden;
   padding: 0em 0em 0.08em 0.05em;
-  text-shadow: -8px 1px var(--shadow-color);
-  -webkit-text-stroke: 4px var(--shadow-color);
+  text-shadow: -4px 1px var(--shadow-color);
+  -webkit-text-stroke: 2px var(--shadow-color);
 
   display: flex;
   align-items: center;
@@ -86,4 +87,25 @@ body {
 
 .turn {
   border-bottom: 1px solid black;
+}
+
+/* Media query styles */
+@media screen and (min-width: 620px) {
+  .gameboard {
+    width: 600px;
+    height: 600px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    place-content: center;
+    gap: var(--cell-gap);
+  }
+
+  .cell {
+    font-size: 12rem;
+    text-shadow: -8px 1px var(--shadow-color);
+    -webkit-text-stroke: 4px var(--shadow-color);
+    width: 150px;
+    height: 150px;
+  }
 }
