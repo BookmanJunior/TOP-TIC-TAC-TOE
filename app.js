@@ -41,9 +41,15 @@ const displayController = (() => {
     });
   };
 
-  const setWinningClasses = (array) => {
+  const setWinClasses = (array) => {
     array.forEach((item) => {
       cells[item].classList.add("win");
+    });
+  };
+
+  const setWinAnimation = (array) => {
+    array.forEach((item) => {
+      cells[item].classList.add("win-animation");
     });
   };
 
@@ -56,7 +62,8 @@ const displayController = (() => {
   return {
     render,
     getCells,
-    setWinningClasses,
+    setWinClasses,
+    setWinAnimation,
     resetClasses,
     restartBtn,
   };
@@ -82,7 +89,8 @@ const gameController = (() => {
   const player1 = Player("Player 1", "x");
   const player2 = Player("Player 2", "o");
   const cells = displayController.getCells();
-
+  let gameOn = true;
+  let restartTimer;
   let currentPlayer = player1;
 
   const changeTurn = () => {
@@ -93,7 +101,13 @@ const gameController = (() => {
     }
   };
 
-  let gameOn = true;
+  const restartGame = () => {
+    gameBoard.resetBoard();
+    displayController.render();
+    displayController.resetClasses();
+    currentPlayer = player1;
+    gameOn = true;
+  };
 
   const playRound = (cell, index) => {
     if (!cell.textContent) {
@@ -104,7 +118,9 @@ const gameController = (() => {
 
     if (winPattern) {
       gameOn = false;
-      displayController.setWinningClasses(winPattern);
+      displayController.setWinClasses(winPattern);
+      displayController.setWinAnimation(winPattern);
+      restartTimer = window.setTimeout(restartGame, 1600);
     }
 
     if (gameBoard.checkForDraw()) {
@@ -124,15 +140,10 @@ const gameController = (() => {
     });
   };
 
-  const restartGame = () => {
-    gameBoard.resetBoard();
-    displayController.render();
-    displayController.resetClasses();
-    currentPlayer = player1;
-    gameOn = true;
-  };
-
-  displayController.restartBtn.addEventListener("click", restartGame);
+  displayController.restartBtn.addEventListener("click", () => {
+    clearTimeout(restartTimer);
+    restartGame();
+  });
 
   return { playGame };
 })();
