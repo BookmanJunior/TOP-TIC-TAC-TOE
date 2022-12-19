@@ -50,6 +50,7 @@ const displayController = (() => {
   const setWinAnimation = (array) => {
     array.forEach((item) => {
       cells[item].classList.add("win-animation");
+      cells[item].style.animationDelay = "0s"; // removes cell's entrance animation delay
     });
   };
 
