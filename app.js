@@ -102,11 +102,11 @@ const gameController = (() => {
   };
 
   const restartGame = () => {
-    gameBoard.resetBoard();
-    displayController.render();
-    displayController.resetClasses();
-    currentPlayer = player1;
     gameOn = true;
+    currentPlayer = player1;
+    gameBoard.resetBoard();
+    displayController.resetClasses();
+    displayController.render();
   };
 
   const playRound = (cell, index) => {
@@ -120,7 +120,7 @@ const gameController = (() => {
       gameOn = false;
       displayController.setWinClasses(winPattern);
       displayController.setWinAnimation(winPattern);
-      restartTimer = window.setTimeout(restartGame, 1600);
+      restartTimer = setTimeout(restartGame, 1600);
     }
 
     if (gameBoard.checkForDraw()) {
