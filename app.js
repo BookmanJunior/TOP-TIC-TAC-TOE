@@ -112,22 +112,22 @@ const gameController = (() => {
   const playRound = (cell, index) => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
+
+      const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+
+      if (winPattern) {
+        gameOn = false;
+        displayController.setWinClasses(winPattern);
+        displayController.setWinAnimation(winPattern);
+        restartTimer = setTimeout(restartGame, 1600);
+      }
+
+      if (gameBoard.checkForDraw()) {
+        gameOn = false;
+      }
+
+      changeTurn();
     }
-
-    const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
-
-    if (winPattern) {
-      gameOn = false;
-      displayController.setWinClasses(winPattern);
-      displayController.setWinAnimation(winPattern);
-      restartTimer = setTimeout(restartGame, 1600);
-    }
-
-    if (gameBoard.checkForDraw()) {
-      gameOn = false;
-    }
-
-    changeTurn();
   };
 
   const playGame = () => {
