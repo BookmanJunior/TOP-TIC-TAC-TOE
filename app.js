@@ -103,8 +103,8 @@ const gameController = (() => {
     const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
 
     if (winPattern) {
-      displayController.setWinningClasses(winPattern);
       gameOn = false;
+      displayController.setWinningClasses(winPattern);
     }
 
     if (gameBoard.checkForDraw()) {
@@ -128,6 +128,7 @@ const gameController = (() => {
     gameBoard.resetBoard();
     displayController.render();
     displayController.resetClasses();
+    currentPlayer = player1;
     gameOn = true;
   };
 
