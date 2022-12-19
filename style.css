@@ -124,6 +124,29 @@ body {
   transform: scaleX(1);
 }
 
+/* Animation */
+.win-animation {
+  animation: 400ms ease-in-out infinite win;
+}
+
+@keyframes win {
+  0% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
 /* Media query styles */
 @media screen and (min-width: 620px) {
   .gameboard {
