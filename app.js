@@ -48,16 +48,10 @@ const displayController = (() => {
 
   const setWinClasses = (array, player) => {
     array.forEach((item) => {
-      cells[item].classList.add("win");
-    });
-    playerContainer[player].classList.add("winner");
-  };
-
-  const setWinAnimation = (array) => {
-    array.forEach((item) => {
-      cells[item].classList.add("win-animation");
+      cells[item].classList.add("win", "win-animation");
       cells[item].style.animationDelay = "0s"; // removes cell's entrance animation delay
     });
+    playerContainer[player].classList.add("winner");
   };
 
   const setDrawClasses = (array) => {
@@ -80,7 +74,6 @@ const displayController = (() => {
     getPlayerContainer,
     setWinClasses,
     setDrawClasses,
-    setWinAnimation,
     resetClasses,
     restartBtn,
   };
@@ -137,7 +130,6 @@ const gameController = (() => {
       if (winPattern) {
         gameOn = false;
         displayController.setWinClasses(winPattern, currentPlayerID);
-        displayController.setWinAnimation(winPattern);
         restartTimer = setTimeout(restartGame, 1600);
       }
 
