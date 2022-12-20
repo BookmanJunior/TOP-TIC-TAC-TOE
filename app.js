@@ -32,8 +32,13 @@ const gameBoard = (() => {
 
 const displayController = (() => {
   const cells = Array.from(document.getElementsByClassName("cell"));
+  const playerContainer = {
+    player1: document.getElementById("player1Wrapper"),
+    player2: document.getElementById("player2Wrapper"),
+  };
   const restartBtn = document.getElementById("restartBtn");
   const getCells = () => [...cells];
+  const getPlayerContainer = () => playerContainer;
 
   const render = () => {
     cells.forEach((cell, index) => {
@@ -41,16 +46,11 @@ const displayController = (() => {
     });
   };
 
-  const setWinClasses = (array) => {
+  const setWinClasses = (array, player) => {
     array.forEach((item) => {
       cells[item].classList.add("win");
     });
-  };
-
-  const setDrawClasses = (array) => {
-    array.forEach((item) => {
-      item.classList.add("draw");
-    });
+    playerContainer[player].classList.add("winner");
   };
 
   const setWinAnimation = (array) => {
@@ -60,15 +60,23 @@ const displayController = (() => {
     });
   };
 
-  const resetClasses = () => {
+  const setDrawClasses = (array) => {
+    array.forEach((item) => {
+      item.classList.add("draw");
+    });
+  };
+
+  const resetClasses = (player) => {
     cells.forEach((cell) => {
       cell.className = "cell";
     });
+    playerContainer[player].className = "player-wrapper";
   };
 
   return {
     render,
     getCells,
+    getPlayerContainer,
     setWinClasses,
     setDrawClasses,
     setWinAnimation,
@@ -77,9 +85,10 @@ const displayController = (() => {
   };
 })();
 
-const Player = (name, marker) => {
+const Player = (name, marker, id) => {
   const getName = () => name;
   const getMarker = () => marker;
+  const getId = () => id; // unique id to identify players regardless of name
 
   const setName = (newName) => {
     name = newName;
@@ -90,12 +99,12 @@ const Player = (name, marker) => {
     displayController.render();
   };
 
-  return { makeMove, getName, getMarker, setName };
+  return { makeMove, getName, getMarker, getId, setName };
 };
 
 const gameController = (() => {
-  const player1 = Player("Player 1", "x");
-  const player2 = Player("Player 2", "o");
+  const player1 = Player("Player 1", "x", "player1");
+  const player2 = Player("Player 2", "o", "player2");
   const cells = displayController.getCells();
   let gameOn = true;
   let restartTimer;
@@ -109,11 +118,11 @@ const gameController = (() => {
     }
   };
 
-  const restartGame = () => {
+  const restartGame = (player) => {
     gameOn = true;
     currentPlayer = player1;
     gameBoard.resetBoard();
-    displayController.resetClasses();
+    displayController.resetClasses(player);
     displayController.render();
   };
 
@@ -122,18 +131,19 @@ const gameController = (() => {
       currentPlayer.makeMove(index);
 
       const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
+      const currentPlayerID = currentPlayer.getId();
 
       if (winPattern) {
         gameOn = false;
-        displayController.setWinClasses(winPattern);
+        displayController.setWinClasses(winPattern, currentPlayerID);
         displayController.setWinAnimation(winPattern);
-        restartTimer = setTimeout(restartGame, 1600);
+        restartTimer = setTimeout(restartGame, 1600, currentPlayerID);
       }
 
       if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
         displayController.setDrawClasses(cells);
-        restartTimer = setTimeout(restartGame, 1600);
+        restartTimer = setTimeout(restartGame, 1600, currentPlayerID);
       }
 
       changeTurn();
