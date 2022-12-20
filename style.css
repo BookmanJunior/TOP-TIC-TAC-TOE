@@ -87,6 +87,10 @@ body {
   background-color: #93faa4;
 }
 
+.cell.draw {
+  background-color: #e96363;
+}
+
 .turn {
   border-bottom: 1px solid black;
 }
