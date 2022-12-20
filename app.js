@@ -47,6 +47,12 @@ const displayController = (() => {
     });
   };
 
+  const setDrawClasses = (array) => {
+    array.forEach((item) => {
+      item.classList.add("draw");
+    });
+  };
+
   const setWinAnimation = (array) => {
     array.forEach((item) => {
       cells[item].classList.add("win-animation");
@@ -64,6 +70,7 @@ const displayController = (() => {
     render,
     getCells,
     setWinClasses,
+    setDrawClasses,
     setWinAnimation,
     resetClasses,
     restartBtn,
@@ -123,8 +130,10 @@ const gameController = (() => {
         restartTimer = setTimeout(restartGame, 1600);
       }
 
-      if (gameBoard.checkForDraw()) {
+      if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
+        displayController.setDrawClasses(cells);
+        restartTimer = setTimeout(restartGame, 1600);
       }
 
       changeTurn();
