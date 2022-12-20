@@ -12,7 +12,7 @@
   --draw-color: #e96363;
   --cell-gap: 1em;
   --shrink-size: 2;
-  --stagger-delay: 200ms;
+  --stagger-delay: 150ms;
 }
 
 * {
