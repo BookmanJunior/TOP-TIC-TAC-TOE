@@ -7,6 +7,7 @@
   --gameboard-background-color: #ffffff;
   --border-color: #000000;
   --shadow-color: #000000;
+  --winner: #008f18;
   --win-color: #93faa4;
   --draw-color: #e96363;
   --cell-gap: 1em;
@@ -81,6 +82,10 @@ body {
   align-items: center;
   justify-content: center;
   animation: cellEntrance 500ms ease-out backwards;
+}
+
+.winner {
+  color: var(--winner);
 }
 
 .cell.win {
