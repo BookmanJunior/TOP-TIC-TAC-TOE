@@ -7,8 +7,8 @@
   --gameboard-background-color: #ffffff;
   --border-color: #000000;
   --shadow-color: #000000;
-  --candlelight: #fcd015;
-  --yellow: #fbb500;
+  --win-color: #93faa4;
+  --draw-color: #e96363;
   --cell-gap: 1em;
   --shrink-size: 2;
   --stagger-delay: 200ms;
@@ -84,11 +84,11 @@ body {
 }
 
 .cell.win {
-  background-color: #93faa4;
+  background-color: var(--win-color);
 }
 
 .cell.draw {
-  background-color: #e96363;
+  background-color: var(--draw-color);
 }
 
 .turn {
