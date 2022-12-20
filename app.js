@@ -66,11 +66,12 @@ const displayController = (() => {
     });
   };
 
-  const resetClasses = (player) => {
+  const resetClasses = () => {
     cells.forEach((cell) => {
       cell.className = "cell";
     });
-    playerContainer[player].className = "player-wrapper";
+    playerContainer.player1.className = "player-wrapper";
+    playerContainer.player2.className = "player-wrapper";
   };
 
   return {
@@ -118,11 +119,11 @@ const gameController = (() => {
     }
   };
 
-  const restartGame = (player) => {
+  const restartGame = () => {
     gameOn = true;
     currentPlayer = player1;
     gameBoard.resetBoard();
-    displayController.resetClasses(player);
+    displayController.resetClasses();
     displayController.render();
   };
 
@@ -137,13 +138,13 @@ const gameController = (() => {
         gameOn = false;
         displayController.setWinClasses(winPattern, currentPlayerID);
         displayController.setWinAnimation(winPattern);
-        restartTimer = setTimeout(restartGame, 1600, currentPlayerID);
+        restartTimer = setTimeout(restartGame, 1600);
       }
 
       if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
         displayController.setDrawClasses(cells);
-        restartTimer = setTimeout(restartGame, 1600, currentPlayerID);
+        restartTimer = setTimeout(restartGame, 1600);
       }
 
       changeTurn();
