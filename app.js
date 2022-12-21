@@ -27,7 +27,30 @@ const gameBoard = (() => {
 
   const checkForDraw = () => board.every((item) => item);
 
-  return { getGameBoard, setCell, resetBoard, checkForWin, checkForDraw };
+  const getEmptyCells = () => {
+    const emptyCells = [];
+    board.forEach((cell, index) => {
+      if (!cell) {
+        emptyCells.push(index);
+      }
+    });
+    return emptyCells;
+  };
+
+  const getRandomEmptyCell = () => {
+    const cells = getEmptyCells();
+    const randomCell = Math.floor(Math.random() * cells.length);
+    return cells[randomCell];
+  };
+
+  return {
+    getGameBoard,
+    setCell,
+    resetBoard,
+    checkForWin,
+    checkForDraw,
+    getRandomEmptyCell,
+  };
 })();
 
 const displayController = (() => {
@@ -151,14 +174,14 @@ const gameController = (() => {
       if (winPattern) {
         gameOn = false;
         displayController.setWinClasses(winPattern, currentPlayerID);
-        restartTimer = setTimeout(restartGame, 1600);
+        restartTimer = setTimeout(restartGame, 1300);
         return;
       }
 
       if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
         displayController.setDrawClasses(cells);
-        restartTimer = setTimeout(restartGame, 1600);
+        restartTimer = setTimeout(restartGame, 1000);
         return;
       }
 
