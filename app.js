@@ -60,12 +60,30 @@ const displayController = (() => {
     });
   };
 
+  const setTurnIndicator = (currentPlayer) => {
+    const newDiv = document.createElement("div");
+    newDiv.className = "turn-indicator";
+    playerContainer[currentPlayer].appendChild(newDiv);
+  };
+
+  setTurnIndicator("player1");
+
+  const removeTurnIndicator = (currentPlayer) => {
+    const element =
+      playerContainer[currentPlayer].querySelector(".turn-indicator");
+    if (element) element.remove();
+  };
+
   const resetClasses = () => {
     cells.forEach((cell) => {
       cell.className = "cell";
     });
     playerContainer.player1.className = "player-wrapper";
     playerContainer.player2.className = "player-wrapper";
+
+    removeTurnIndicator("player1");
+    removeTurnIndicator("player2");
+    setTurnIndicator("player1");
   };
 
   return {
@@ -74,6 +92,8 @@ const displayController = (() => {
     getPlayerContainer,
     setWinClasses,
     setDrawClasses,
+    setTurnIndicator,
+    removeTurnIndicator,
     resetClasses,
     restartBtn,
   };
@@ -123,6 +143,7 @@ const gameController = (() => {
   const playRound = (cell, index) => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
+      displayController.removeTurnIndicator(currentPlayer.getId());
 
       const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
       const currentPlayerID = currentPlayer.getId();
@@ -131,15 +152,18 @@ const gameController = (() => {
         gameOn = false;
         displayController.setWinClasses(winPattern, currentPlayerID);
         restartTimer = setTimeout(restartGame, 1600);
+        return;
       }
 
       if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
         displayController.setDrawClasses(cells);
         restartTimer = setTimeout(restartGame, 1600);
+        return;
       }
 
       changeTurn();
+      displayController.setTurnIndicator(currentPlayer.getId());
     }
   };
 
