@@ -89,6 +89,7 @@ const displayController = (() => {
     playerContainer[currentPlayer].appendChild(newDiv);
   };
 
+  // Adds line under player1
   setTurnIndicator("player1");
 
   const removeTurnIndicator = (currentPlayer) => {
@@ -169,12 +170,10 @@ const gameController = (() => {
       displayController.removeTurnIndicator(currentPlayer.getId());
 
       const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
-      const currentPlayerID = currentPlayer.getId();
-
       if (winPattern) {
         gameOn = false;
-        displayController.setWinClasses(winPattern, currentPlayerID);
-        restartTimer = setTimeout(restartGame, 1300);
+        displayController.setWinClasses(winPattern, currentPlayer.getId());
+        restartTimer = setTimeout(restartGame, 1000);
         return;
       }
 
