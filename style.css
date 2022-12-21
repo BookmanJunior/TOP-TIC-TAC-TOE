@@ -78,6 +78,7 @@ body {
   padding: 0em 0em 0.08em 0.05em;
   text-shadow: -4px 1px var(--shadow-color);
   -webkit-text-stroke: 2px var(--shadow-color);
+  user-select: none;
 
   display: flex;
   align-items: center;
