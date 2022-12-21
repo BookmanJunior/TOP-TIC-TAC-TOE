@@ -40,6 +40,7 @@ body {
   display: flex;
   justify-content: space-around;
   text-align: center;
+  min-height: 50px;
 }
 
 .player-1,
@@ -84,22 +85,6 @@ body {
   animation: cellEntrance 500ms ease-out backwards;
 }
 
-.winner {
-  color: var(--winner);
-}
-
-.cell.win {
-  background-color: var(--win-color);
-}
-
-.cell.draw {
-  background-color: var(--draw-color);
-}
-
-.turn {
-  border-bottom: 1px solid black;
-}
-
 /* Button styles */
 .restart-btn {
   font-family: "Exo", sans-serif;
@@ -135,9 +120,37 @@ body {
   transform: scaleX(1);
 }
 
-/* Animation */
+/* Utility classes */
+.winner {
+  color: var(--winner);
+}
+
+.cell.win {
+  background-color: var(--win-color);
+}
+
+.cell.draw {
+  background-color: var(--draw-color);
+}
+
+.turn-indicator {
+  height: 5px;
+  background-color: black;
+  animation: 300ms forwards turnSlider;
+}
+
 .win-animation {
   animation: 400ms ease-in-out infinite win;
+}
+
+/* Animation */
+@keyframes turnSlider {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @keyframes win {
