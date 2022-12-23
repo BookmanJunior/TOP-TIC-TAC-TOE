@@ -27,15 +27,13 @@ const gameBoard = (() => {
 
   const checkForDraw = () => board.every((item) => item);
 
-  const getEmptyCells = () => {
-    const emptyCells = [];
-    board.forEach((cell, index) => {
-      if (!cell) {
-        emptyCells.push(index);
+  const getEmptyCells = () =>
+    board.reduce((acc, curr, currIndex) => {
+      if (!curr) {
+        acc.push(currIndex);
       }
-    });
-    return emptyCells;
-  };
+      return acc;
+    }, []);
 
   const getRandomEmptyCell = () => {
     const cells = getEmptyCells();
