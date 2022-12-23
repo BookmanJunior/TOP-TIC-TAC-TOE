@@ -10,6 +10,7 @@
   --winner: #008f18;
   --win-color: #93faa4;
   --draw-color: #e96363;
+  --accent-color: #fcccc9;
   --cell-gap: 1em;
   --shrink-size: 2;
   --stagger-delay: 150ms;
@@ -108,7 +109,7 @@ body {
   bottom: 0;
   right: 0;
   z-index: -1;
-  background-color: var(--cell-color);
+  background-color: var(--accent-color);
   border-radius: 5px;
   outline: none;
 
