@@ -142,7 +142,7 @@ const Player = (name, marker, id) => {
 
 const gameController = (() => {
   const player1 = Player("Player 1", "x", "player1");
-  const player2 = Player("Player 2", "o", "player2");
+  const player2 = Player("Random AI", "o", "player2");
   const cells = displayController.getCells();
   let gameOn = true;
   let restartTimer;
@@ -186,6 +186,11 @@ const gameController = (() => {
 
       changeTurn();
       displayController.setTurnIndicator(currentPlayer.getId());
+
+      if (currentPlayer.getName() === "Random AI") {
+        const randomEmptyCell = gameBoard.getRandomEmptyCell();
+        playRound(randomEmptyCell, randomEmptyCell);
+      }
     }
   };
 
