@@ -39,16 +39,24 @@ body {
 
 .players {
   display: flex;
+  align-items: start;
   justify-content: space-around;
   text-align: center;
   min-height: 50px;
 }
 
+.player-wrapper:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  place-content: center;
+  position: relative;
+}
+
 /* Dropdown styles */
 
 .dropdown-container {
-  position: relative;
-  padding: 3px;
+  align-self: center;
+  padding-top: 1em;
 }
 
 .dropdown-arrow {
@@ -68,8 +76,8 @@ body {
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.25rem);
-  left: -70px;
+  top: calc(100% + 0.25em);
+  right: calc(100% - 8em);
   height: fit-content;
   min-width: 200px;
   background-color: var(--background-color);
