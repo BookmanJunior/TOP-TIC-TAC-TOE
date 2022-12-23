@@ -108,6 +108,35 @@ const displayController = (() => {
     setTurnIndicator("player1");
   };
 
+  const displayDropdown = (e) => {
+    const dropdownArrow = document.getElementById("dropdownArrow");
+    const dropdownContent = document.getElementById("dropdownMenu");
+    const isDropdownArrow = e.target.matches(".dropdown-arrow");
+
+    if (isDropdownArrow) {
+      dropdownArrow.classList.toggle("active");
+      dropdownContent.classList.toggle("active");
+    }
+
+    if (!isDropdownArrow) {
+      dropdownArrow.classList.remove("active");
+      dropdownContent.classList.remove("active");
+    }
+  };
+
+  document.addEventListener("click", displayDropdown);
+
+  const setPlayer = (e, player, fn) => {
+    const name = e.target.textContent;
+    if (name === player.getName()) return;
+
+    if (e.target.matches(".player-option")) {
+      player.setName(name);
+      document.querySelector(".player-2").textContent = player.getName();
+      fn();
+    }
+  };
+
   return {
     render,
     getCells,
@@ -117,6 +146,7 @@ const displayController = (() => {
     setTurnIndicator,
     removeTurnIndicator,
     resetClasses,
+    setPlayer,
     restartBtn,
   };
 })();
@@ -140,7 +170,7 @@ const Player = (name, marker, id) => {
 
 const gameController = (() => {
   const player1 = Player("Player 1", "x", "player1");
-  const player2 = Player("Random AI", "o", "player2");
+  const player2 = Player("Player 2", "o", "player2");
   const cells = displayController.getCells();
   let gameOn = true;
   let restartTimer;
@@ -205,6 +235,10 @@ const gameController = (() => {
   displayController.restartBtn.addEventListener("click", () => {
     clearTimeout(restartTimer);
     restartGame();
+  });
+
+  document.addEventListener("click", (e) => {
+    displayController.setPlayer(e, player2, restartGame);
   });
 
   return { playGame };
