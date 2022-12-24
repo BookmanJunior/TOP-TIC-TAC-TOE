@@ -49,6 +49,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 50px;
   place-content: center;
+  min-width: 155px;
   position: relative;
 }
 
@@ -77,7 +78,7 @@ body {
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 0.25em);
-  right: calc(100% - 8em);
+  right: 0;
   height: fit-content;
   min-width: 200px;
   background-color: var(--background-color);
