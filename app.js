@@ -138,6 +138,16 @@ const displayController = (() => {
     }
   };
 
+  const setCellsState = (player) => {
+    cells.forEach((cell) => {
+      if (player.getName() === "Player 1" || player.getName() === "Player 2") {
+        cell.style.pointerEvents = "auto";
+      } else {
+        cell.style.pointerEvents = "none";
+      }
+    });
+  };
+
   return {
     render,
     getCells,
@@ -148,6 +158,7 @@ const displayController = (() => {
     removeTurnIndicator,
     resetClasses,
     setPlayer,
+    setCellsState,
     restartBtn,
   };
 })();
@@ -190,6 +201,7 @@ const gameController = (() => {
     currentPlayer = player1;
     gameBoard.resetBoard();
     displayController.resetClasses();
+    displayController.setCellsState(currentPlayer);
     displayController.render();
   };
 
@@ -214,11 +226,12 @@ const gameController = (() => {
       }
 
       changeTurn();
+      displayController.setCellsState(currentPlayer);
       displayController.setTurnIndicator(currentPlayer.getId());
 
       if (currentPlayer.getName() === "Random AI") {
         const randomEmptyCell = gameBoard.getRandomEmptyCell();
-        playRound(randomEmptyCell, randomEmptyCell);
+        setTimeout(playRound, 300, randomEmptyCell, randomEmptyCell);
       }
     }
   };
