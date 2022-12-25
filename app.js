@@ -127,6 +127,7 @@ const displayController = (() => {
   document.addEventListener("click", displayDropdown);
 
   const setPlayer = (e, player, fn) => {
+    // sets new player and restarts the game
     const name = e.target.textContent;
     if (name === player.getName()) return;
 
