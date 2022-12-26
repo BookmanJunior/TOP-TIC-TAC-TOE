@@ -36,9 +36,65 @@ const gameBoard = (() => {
     }, []);
 
   const getRandomEmptyCell = () => {
+    // random AI move
     const cells = getEmptyCells();
     const randomCell = Math.floor(Math.random() * cells.length);
     return cells[randomCell];
+  };
+
+  const minimax = (gameboard, depth, isMax) => {
+    // return if there's a terminal state
+    if (checkForWin("x")) {
+      return 10;
+    }
+
+    if (checkForWin("o")) {
+      return -10;
+    }
+
+    if (!checkForWin("x") && !checkForWin("o") && checkForDraw()) {
+      return 0;
+    }
+
+    if (isMax) {
+      let bestScore = -Infinity;
+
+      getEmptyCells().forEach((cell) => {
+        // test each potential move on board
+        gameboard[cell] = "x";
+        const score = minimax(board, depth + 1, false);
+        gameboard[cell] = "";
+        bestScore = Math.max(bestScore, score);
+      });
+      console.log(bestScore);
+      return bestScore;
+    }
+
+    let bestScore = Infinity;
+    getEmptyCells().forEach((cell) => {
+      gameboard[cell] = "o";
+      const score = minimax(board, depth + 1, true);
+      gameboard[cell] = "";
+      bestScore = Math.min(bestScore, score);
+    });
+    return bestScore;
+  };
+
+  const getBestMove = () => {
+    let bestScore = Infinity;
+    let bestMove;
+
+    getEmptyCells().forEach((cell) => {
+      // getting best move for minimizing player(AI)
+      board[cell] = "o";
+      const score = minimax(board, 0, true); // next turn checks for isMax(true)
+      board[cell] = "";
+      if (score < bestScore) {
+        bestScore = score;
+        bestMove = cell;
+      }
+    });
+    return bestMove;
   };
 
   return {
@@ -48,6 +104,7 @@ const gameBoard = (() => {
     checkForWin,
     checkForDraw,
     getRandomEmptyCell,
+    getBestMove,
   };
 })();
 
@@ -232,6 +289,11 @@ const gameController = (() => {
       if (currentPlayer.getName() === "Random AI") {
         const randomEmptyCell = gameBoard.getRandomEmptyCell();
         setTimeout(playRound, 300, randomEmptyCell, randomEmptyCell);
+      }
+
+      if (currentPlayer.getName() === "Unbeatable AI") {
+        const bestMove = gameBoard.getBestMove();
+        setTimeout(playRound, 300, bestMove, bestMove);
       }
     }
   };
