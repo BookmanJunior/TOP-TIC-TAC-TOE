@@ -162,18 +162,6 @@ button {
   padding: 1em;
 }
 
-.dropdown-menu > button:nth-child(1):before {
-  border-radius: 5px 5px 0 0;
-}
-
-.dropdown-menu > button:nth-child(2):before {
-  border-radius: 0;
-}
-
-.dropdown-menu > button:nth-child(3):before {
-  border-radius: 0 0 5px 5px;
-}
-
 button::before {
   content: "";
   position: absolute;
@@ -183,12 +171,29 @@ button::before {
   right: 0;
   z-index: -1;
   background-color: var(--accent-color);
-  border-radius: 5px;
   outline: none;
 
   transition: transform 300ms ease-in-out;
   transform: scaleX(0);
   transform-origin: left;
+}
+
+.restart-btn::before {
+  border-radius: 5px;
+}
+
+.dropdown-menu > button:nth-child(1):before,
+.dropdown-menu > button:nth-child(1) {
+  border-radius: 5px 5px 0 0;
+}
+
+.dropdown-menu > button:nth-child(2) {
+  border-radius: 0;
+}
+
+.dropdown-menu > button:nth-child(3):before,
+.dropdown-menu > button:nth-child(3) {
+  border-radius: 0 0 5px 5px;
 }
 
 button:hover::before,
