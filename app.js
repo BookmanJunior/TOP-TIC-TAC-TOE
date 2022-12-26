@@ -149,7 +149,7 @@ const displayController = (() => {
     playerContainer[player].classList.remove("currentPlayer");
   };
 
-  const turnIndicator = (currentPlayer) => {
+  const setTurnIndicator = (currentPlayer) => {
     if (currentPlayer === "player1") {
       playerContainer.player1.classList.add("currentPlayer");
       playerContainer.player2.classList.remove("currentPlayer");
@@ -205,7 +205,7 @@ const displayController = (() => {
     setDrawClasses,
     resetClasses,
     setPlayer,
-    turnIndicator,
+    setTurnIndicator,
     restartBtn,
   };
 })();
@@ -241,7 +241,7 @@ const gameController = (() => {
     } else {
       currentPlayer = player1;
     }
-    displayController.turnIndicator(currentPlayer.getId());
+    displayController.setTurnIndicator(currentPlayer.getId());
   };
 
   const restartGame = () => {
