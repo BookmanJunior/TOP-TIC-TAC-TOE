@@ -216,7 +216,7 @@ button:focus::before {
 }
 
 .win-animation {
-  animation: 400ms ease-in-out infinite win;
+  animation: 100ms ease-in-out infinite alternate win;
 }
 
 /* Animation */
@@ -230,20 +230,11 @@ button:focus::before {
 }
 
 @keyframes win {
-  0% {
-    transform: rotate(-5deg);
+  from {
+    transform: rotate(-10deg);
   }
-  25% {
-    transform: rotate(5deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-  75% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(-5deg);
+  to {
+    transform: rotate(10deg);
   }
 }
 
