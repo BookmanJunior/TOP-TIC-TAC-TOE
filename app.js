@@ -45,11 +45,12 @@ const gameBoard = (() => {
   const minimax = (gameboard, depth, isMax) => {
     // return if there's a terminal state
     if (checkForWin("x")) {
-      return 10;
+      // takes shortest path to victory or draw
+      return 10 - depth;
     }
 
     if (checkForWin("o")) {
-      return -10;
+      return -10 + depth;
     }
 
     if (!checkForWin("x") && !checkForWin("o") && checkForDraw()) {
