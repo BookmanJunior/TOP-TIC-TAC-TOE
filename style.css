@@ -36,6 +36,8 @@ body {
   height: 100vh;
 }
 
+/* Players styles */
+
 .players {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -46,10 +48,26 @@ body {
   min-height: 50px;
 }
 
+.player-wrapper {
+  position: relative;
+}
+
+.currentPlayer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: calc(0px - 0.5em);
+  display: inline-block;
+  height: 5px;
+  width: 100%;
+  background-color: black;
+  animation: 300ms forwards turnSlider;
+  grid-column: 1 / 1; /* Limits the width of the line to players name on player-2 wrapper */
+}
+
 .player-wrapper:nth-child(2) {
   display: grid;
   grid-template-columns: 1fr 50px;
-  position: relative;
 }
 
 /* Dropdown styles */
@@ -211,12 +229,6 @@ button:focus::before {
 
 .cell.draw {
   background-color: var(--draw-color);
-}
-
-.turn-indicator {
-  height: 5px;
-  background-color: black;
-  animation: 300ms forwards turnSlider;
 }
 
 .win-animation {
