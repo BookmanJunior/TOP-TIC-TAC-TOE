@@ -42,7 +42,7 @@ const gameBoard = (() => {
     return cells[randomCell];
   };
 
-  const minimax = (gameboard, depth, isMax) => {
+  const minimax = (gameboard, depth, isMax, alpha, beta) => {
     // return if there's a terminal state
     if (checkForWin("x")) {
       // takes shortest path to victory or draw
@@ -60,24 +60,32 @@ const gameBoard = (() => {
     if (isMax) {
       let bestScore = -Infinity;
 
-      getEmptyCells().forEach((cell) => {
+      for (const cell of getEmptyCells()) {
         // test each potential move on board
         gameboard[cell] = "x";
-        const score = minimax(board, depth + 1, false);
+        const score = minimax(board, depth + 1, false, alpha, beta);
         gameboard[cell] = "";
         bestScore = Math.max(bestScore, score);
-      });
-      console.log(bestScore);
+        alpha = Math.max(alpha, bestScore);
+        // Alpha Beta Pruning
+        if (beta <= alpha) {
+          break;
+        }
+      }
       return bestScore;
     }
 
     let bestScore = Infinity;
-    getEmptyCells().forEach((cell) => {
+    for (const cell of getEmptyCells()) {
       gameboard[cell] = "o";
       const score = minimax(board, depth + 1, true);
       gameboard[cell] = "";
       bestScore = Math.min(bestScore, score);
-    });
+      beta = Math.min(beta, bestScore);
+      if (beta <= alpha) {
+        break;
+      }
+    }
     return bestScore;
   };
 
@@ -88,7 +96,7 @@ const gameBoard = (() => {
     getEmptyCells().forEach((cell) => {
       // getting best move for minimizing player(AI)
       board[cell] = "o";
-      const score = minimax(board, 0, true); // next turn checks for isMax(true)
+      const score = minimax(board, 0, true, -Infinity, Infinity); // next turn checks for isMax(true)
       board[cell] = "";
       if (score < bestScore) {
         bestScore = score;
