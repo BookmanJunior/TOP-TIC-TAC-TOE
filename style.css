@@ -34,22 +34,21 @@ body {
   display: grid;
   place-content: center;
   height: 100vh;
-  row-gap: 1em;
 }
 
 .players {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: start;
-  justify-content: space-around;
+  justify-items: center;
   text-align: center;
+  font-size: 0.9rem;
   min-height: 50px;
 }
 
 .player-wrapper:nth-child(2) {
   display: grid;
   grid-template-columns: 1fr 50px;
-  place-content: center;
-  min-width: 155px;
   position: relative;
 }
 
@@ -80,7 +79,6 @@ body {
   top: calc(100% + 0.25em);
   right: 0;
   height: fit-content;
-  min-width: 200px;
   background-color: var(--background-color);
   border-radius: 5px;
   border: 1px solid black;
@@ -104,9 +102,9 @@ body {
   background-color: var(--gameboard-background-color);
   width: calc(600px / var(--shrink-size));
   height: calc(600px / var(--shrink-size));
-  border: 10px solid var(--border-color);
+  border: 5px solid var(--border-color);
   border-radius: 16px;
-  box-shadow: -8px 8px var(--shadow-color);
+  box-shadow: -4px 4px var(--shadow-color);
 
   display: grid;
   grid-template-columns: repeat(3, 75px);
@@ -119,9 +117,9 @@ body {
   width: calc(150px / var(--shrink-size));
   height: calc(150px / var(--shrink-size));
   background-color: var(--cell-color);
-  border: 5px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 16px;
-  box-shadow: -3px 5px var(--shadow-color);
+  box-shadow: -1px 2px var(--shadow-color);
   color: transparent;
   cursor: pointer;
   overflow: hidden;
@@ -139,7 +137,7 @@ body {
 /* Button styles */
 button {
   font-family: "Exo", sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
@@ -152,6 +150,7 @@ button {
   padding: 8px 16px;
   width: 30%;
   place-self: center;
+  margin-top: 10px;
 }
 
 .dropdown-menu > button {
@@ -296,6 +295,8 @@ button:focus::before {
   .gameboard {
     width: 600px;
     height: 600px;
+    border: 10px solid var(--border-color);
+    box-shadow: -8px 8px var(--shadow-color);
 
     display: grid;
     grid-template-columns: repeat(3, 150px);
@@ -305,9 +306,28 @@ button:focus::before {
 
   .cell {
     font-size: 12rem;
+    border: 5px solid var(--border-color);
+    box-shadow: -3px 5px var(--shadow-color);
     text-shadow: -8px 1px var(--shadow-color);
     -webkit-text-stroke: 4px var(--shadow-color);
     width: 150px;
     height: 150px;
+  }
+
+  .players {
+    font-size: 1.1rem;
+    min-height: 70px;
+  }
+
+  .dropdown-menu {
+    min-width: 200px;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+  .restart-btn {
+    margin-top: 20px;
   }
 }
