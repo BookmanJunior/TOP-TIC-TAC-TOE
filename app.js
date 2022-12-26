@@ -204,16 +204,6 @@ const displayController = (() => {
     }
   };
 
-  const setCellsState = (player) => {
-    cells.forEach((cell) => {
-      if (player.getName() === "Player 1" || player.getName() === "Player 2") {
-        cell.style.pointerEvents = "auto";
-      } else {
-        cell.style.pointerEvents = "none";
-      }
-    });
-  };
-
   return {
     render,
     getCells,
@@ -224,7 +214,6 @@ const displayController = (() => {
     removeTurnIndicator,
     resetClasses,
     setPlayer,
-    setCellsState,
     restartBtn,
   };
 })();
@@ -267,7 +256,6 @@ const gameController = (() => {
     currentPlayer = player1;
     gameBoard.resetBoard();
     displayController.resetClasses();
-    displayController.setCellsState(currentPlayer);
     displayController.render();
   };
 
@@ -292,7 +280,6 @@ const gameController = (() => {
       }
 
       changeTurn();
-      displayController.setCellsState(currentPlayer);
       displayController.setTurnIndicator(currentPlayer.getId());
 
       if (currentPlayer.getName() === "Random AI") {
@@ -311,7 +298,11 @@ const gameController = (() => {
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
         if (gameOn) {
-          playRound(cell, index);
+          const player = currentPlayer.getName();
+          // disables player making turn on AI's move
+          if (player === "Player 1" || player === "Player 2") {
+            playRound(cell, index);
+          }
         }
       });
     });
