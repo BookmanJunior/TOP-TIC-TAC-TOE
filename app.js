@@ -139,39 +139,32 @@ const displayController = (() => {
       cells[item].style.animationDelay = "0s"; // removes cell's entrance animation delay
     });
     playerContainer[player].classList.add("winner");
+    playerContainer[player].classList.remove("currentPlayer");
   };
 
-  const setDrawClasses = (array) => {
+  const setDrawClasses = (array, player) => {
     array.forEach((item) => {
       item.classList.add("draw");
     });
+    playerContainer[player].classList.remove("currentPlayer");
   };
 
-  const setTurnIndicator = (currentPlayer) => {
-    const newDiv = document.createElement("div");
-    newDiv.className = "turn-indicator";
-    playerContainer[currentPlayer].appendChild(newDiv);
-  };
-
-  // Adds line under player1
-  setTurnIndicator("player1");
-
-  const removeTurnIndicator = (currentPlayer) => {
-    const element =
-      playerContainer[currentPlayer].querySelector(".turn-indicator");
-    if (element) element.remove();
+  const turnIndicator = (currentPlayer) => {
+    if (currentPlayer === "player1") {
+      playerContainer.player1.classList.add("currentPlayer");
+      playerContainer.player2.classList.remove("currentPlayer");
+    } else if (currentPlayer === "player2") {
+      playerContainer.player2.classList.add("currentPlayer");
+      playerContainer.player1.classList.remove("currentPlayer");
+    }
   };
 
   const resetClasses = () => {
     cells.forEach((cell) => {
       cell.className = "cell";
     });
-    playerContainer.player1.className = "player-wrapper";
+    playerContainer.player1.className = "player-wrapper currentPlayer";
     playerContainer.player2.className = "player-wrapper";
-
-    removeTurnIndicator("player1");
-    removeTurnIndicator("player2");
-    setTurnIndicator("player1");
   };
 
   const displayDropdown = (e) => {
@@ -210,10 +203,9 @@ const displayController = (() => {
     getPlayerContainer,
     setWinClasses,
     setDrawClasses,
-    setTurnIndicator,
-    removeTurnIndicator,
     resetClasses,
     setPlayer,
+    turnIndicator,
     restartBtn,
   };
 })();
@@ -249,6 +241,7 @@ const gameController = (() => {
     } else {
       currentPlayer = player1;
     }
+    displayController.turnIndicator(currentPlayer.getId());
   };
 
   const restartGame = () => {
@@ -262,7 +255,6 @@ const gameController = (() => {
   const playRound = (cell, index) => {
     if (!cell.textContent) {
       currentPlayer.makeMove(index);
-      displayController.removeTurnIndicator(currentPlayer.getId());
 
       const winPattern = gameBoard.checkForWin(currentPlayer.getMarker());
       if (winPattern) {
@@ -274,13 +266,12 @@ const gameController = (() => {
 
       if (!winPattern && gameBoard.checkForDraw()) {
         gameOn = false;
-        displayController.setDrawClasses(cells);
+        displayController.setDrawClasses(cells, currentPlayer.getId());
         restartTimer = setTimeout(restartGame, 1000);
         return;
       }
 
       changeTurn();
-      displayController.setTurnIndicator(currentPlayer.getId());
 
       if (currentPlayer.getName() === "Random AI") {
         const randomEmptyCell = gameBoard.getRandomEmptyCell();
