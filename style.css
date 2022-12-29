@@ -229,6 +229,7 @@ button:focus::before {
 
 .cell.draw {
   background-color: var(--draw-color);
+  animation: 300ms ease-in-out forwards drawAnimation;
 }
 
 .win-animation {
@@ -236,6 +237,17 @@ button:focus::before {
 }
 
 /* Animation */
+
+@keyframes drawAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+
 @keyframes turnSlider {
   from {
     transform: scaleX(0);
