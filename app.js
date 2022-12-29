@@ -133,11 +133,17 @@ const displayController = (() => {
     });
   };
 
+  const setAnimationDelay = (value) => {
+    cells.forEach((cell) => {
+      cell.style.animationDelay = `${value}ms`;
+    });
+  };
+
   const setWinClasses = (array, player) => {
     array.forEach((item) => {
       cells[item].classList.add("win", "win-animation");
-      cells[item].style.animationDelay = "0s"; // removes cell's entrance animation delay
     });
+    setAnimationDelay(0); // removes cell's entrance animation delay
     playerContainer[player].classList.add("winner");
     playerContainer[player].classList.remove("currentPlayer");
   };
@@ -146,6 +152,7 @@ const displayController = (() => {
     array.forEach((item) => {
       item.classList.add("draw");
     });
+    setAnimationDelay(400);
     playerContainer[player].classList.remove("currentPlayer");
   };
 
@@ -206,6 +213,7 @@ const displayController = (() => {
     resetClasses,
     setPlayer,
     setTurnIndicator,
+    setAnimationDelay,
     restartBtn,
   };
 })();
@@ -249,6 +257,7 @@ const gameController = (() => {
     currentPlayer = player1;
     gameBoard.resetBoard();
     displayController.resetClasses();
+    displayController.setAnimationDelay(0);
     displayController.render();
   };
 
